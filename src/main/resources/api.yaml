@@ -1,0 +1,164 @@
+openapi: 3.0.3
+info:
+  title: NK Order Process Service API
+  description: API for managing customer in the NK Order Process Microservice
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local development server
+  - url: https://mock.nk-order-process-ms.com/api/v1
+    description: Mock server for testing endpoints with example data
+paths:
+  /customer:
+    get:
+      summary: Retrieve a list of customer
+      operationId: listCustomer
+      responses:
+        '200':
+          description: A list of customer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+      tags:
+        - Customer
+    post:
+      summary: Create a new customer
+      operationId: createCustomer
+      requestBody:
+        description: Customer to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+      tags:
+        - Customer
+  /customer/{id}:
+    get:
+      summary: Retrieve a single customer by ID
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the customer to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Customer found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+      tags:
+        - Customer
+    put:
+      summary: Update an existing customer by ID
+      operationId: updateCustomer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the customer to update
+          schema:
+            type: string
+      requestBody:
+        description: Updated customer data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerInput'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          description: Customer not found
+      tags:
+        - Customer
+    delete:
+      summary: Delete a customer by ID
+      operationId: deleteCustomer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the customer to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Customer deleted successfully
+        '404':
+          description: Customer not found
+      tags:
+        - Customer
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the customer
+          example: 64b7fd18e13e3c76f1f6d4b2
+        document:
+          type: string
+          description: Document number of the customer
+          example: "53354296070"
+        name:
+          type: string
+          description: Name of the customer
+          example: "João Silva"
+        address:
+          type: string
+          description: Address of the customer
+          example: "Street of x, 10"
+        phoneNumber:
+          type: string
+          description: Phone number of the customer
+          example: "(11) 98765-4321"
+        email:
+          type: string
+          description: Email address of the customer
+          example: "joao@email.com"
+    CustomerInput:
+      type: object
+      properties:
+        document:
+          type: string
+          description: Document number of the customer
+          example: "53354296070"
+        name:
+          type: string
+          description: Name of the customer
+          example: "João Silva"
+        address:
+          type: string
+          description: Address of the customer
+          example: "Street of x, 10"
+        phoneNumber:
+          type: string
+          description: Phone number of the customer
+          example: "(11) 98765-4321"
+        email:
+          type: string
+          description: Email address of the customer
+          example: "joao@email.com"
