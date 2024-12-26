@@ -5,6 +5,6 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: nk-order-process-ms
+      database: admin
       username: ${MONGO_INITDB_ROOT_USERNAME}
       password: ${MONGO_INITDB_ROOT_PASSWORD}
