@@ -37,6 +37,7 @@
         <lombok.version>1.18.36</lombok.version>
         <mapstruct-processor.version>1.6.3</mapstruct-processor.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
     </properties>
     <dependencies>
         <dependency>
@@ -94,6 +95,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -112,7 +118,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>
-                                ${project.basedir}/src/main/resources/api.yaml
+                                ${project.basedir}/src/main/resources/static/openapi/api.yaml
                             </inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>com.nksolucoes.nkorderprocessms.transportlayer.documentacao.openapi</apiPackage>
