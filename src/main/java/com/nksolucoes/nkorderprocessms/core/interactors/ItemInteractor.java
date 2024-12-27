@@ -4,11 +4,12 @@ import com.nksolucoes.nkorderprocessms.core.exceptions.item.DuplicateItemExcepti
 import com.nksolucoes.nkorderprocessms.core.exceptions.item.NotFoundItemException;
 import com.nksolucoes.nkorderprocessms.core.repositories.ItemRepository;
 import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Item;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,8 @@ public class ItemInteractor {
 		return this.itemRepository.createItem(item);
 	}
 
-	public List<Item> listAllItems() {
-		return this.itemRepository.listAllItems();
+	public Page<Item> listAllItems(Pageable pageable) {
+		return this.itemRepository.listAllItems(pageable);
 	}
 
 	public Item getItemById(String itemId) {

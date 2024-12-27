@@ -6,6 +6,8 @@ import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Custome
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,8 +22,8 @@ public class CustomerDataSource implements CustomerRepository {
 	}
 
 	@Override
-	public List<Customer> listAllCustomers() {
-		return customerClientRepository.findAll();
+	public Page<Customer> listAllCustomers(Pageable pageable) {
+		return customerClientRepository.findAll(pageable);
 	}
 
 	@Override

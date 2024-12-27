@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,8 @@ public class CustomerInteractor {
 		return this.customerRepository.createCustomer(customer);
 	}
 
-	public List<Customer> listAllCustomers() {
-		return this.customerRepository.listAllCustomers();
+	public Page<Customer> listAllCustomers(Pageable pageable) {
+		return this.customerRepository.listAllCustomers(pageable);
 	}
 
 	public Customer getCustomerById(String customerId) {

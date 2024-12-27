@@ -6,6 +6,8 @@ import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Item;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,8 +22,8 @@ public class ItemDataSource implements ItemRepository {
 	}
 
 	@Override
-	public List<Item> listAllItems() {
-		return itemClientRepository.findAll();
+	public Page<Item> listAllItems(Pageable pageable) {
+		return itemClientRepository.findAll(pageable);
 	}
 
 	@Override
