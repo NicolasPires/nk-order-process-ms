@@ -1,7 +1,7 @@
-package com.nksolucoes.nkorderprocessms.data.datasources;
+package com.nksolucoes.nkorderprocessms.datasources;
 
 import com.nksolucoes.nkorderprocessms.core.repositories.CustomerRepository;
-import com.nksolucoes.nkorderprocessms.data.datasources.repositories.CustomerClientRepository;
+import com.nksolucoes.nkorderprocessms.datasources.repositories.CustomerClientRepository;
 import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Customer;
 import java.util.List;
 import java.util.Optional;
@@ -37,5 +37,10 @@ public class CustomerDataSource implements CustomerRepository {
 	@Override
 	public void deleteCustomer(String customerId) {
 		this.customerClientRepository.deleteById(customerId);
+	}
+
+	@Override
+	public List<Customer> findByDocumentAndName(String document, String name) {
+		return this.customerClientRepository.findByDocumentAndName(document, name);
 	}
 }

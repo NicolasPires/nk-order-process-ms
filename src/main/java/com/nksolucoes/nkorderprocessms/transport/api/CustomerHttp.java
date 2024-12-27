@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class CustomerController implements CustomerApi {
+public class CustomerHttp implements CustomerApi {
 
 	private final CustomerInteractor customerInteractor;
 

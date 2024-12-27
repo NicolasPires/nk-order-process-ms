@@ -2,7 +2,6 @@ package com.nksolucoes.nkorderprocessms.transport.mapper;
 
 import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Customer;
 import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.CustomerInput;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

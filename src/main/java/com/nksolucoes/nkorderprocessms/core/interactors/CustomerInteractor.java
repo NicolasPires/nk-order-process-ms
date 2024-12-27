@@ -1,6 +1,7 @@
 package com.nksolucoes.nkorderprocessms.core.interactors;
 
-import com.nksolucoes.nkorderprocessms.core.entity.CustomerEntity;
+import com.nksolucoes.nkorderprocessms.core.exceptions.customer.DuplicateCustomerException;
+import com.nksolucoes.nkorderprocessms.core.exceptions.customer.NotFoundCustomerException;
 import com.nksolucoes.nkorderprocessms.core.repositories.CustomerRepository;
 import com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model.Customer;
 import java.util.List;
@@ -17,6 +18,13 @@ public class CustomerInteractor {
 	private final CustomerRepository customerRepository;
 
 	public Customer createCustomer(Customer customer) {
+		customerRepository.findByDocumentAndName(customer.getDocument(), customer.getName())
+				.stream().findFirst().ifPresent(existingCustomer -> {
+					throw new DuplicateCustomerException(
+							String.format("Customer with document '%s' and name '%s' already exists.",
+									customer.getDocument(), customer.getName()));
+					});
+
 		return this.customerRepository.createCustomer(customer);
 	}
 
@@ -27,7 +35,8 @@ public class CustomerInteractor {
 	public Customer getCustomerById(String customerId) {
 		Optional<Customer> customerData = this.customerRepository.findById(customerId);
 		if (customerData.isEmpty()) {
-			new RuntimeException("Customer not found");
+			throw new NotFoundCustomerException(
+					String.format("Customer with id '%s' is not found.", customerId));
 		}
 		return customerData.get();
 	}

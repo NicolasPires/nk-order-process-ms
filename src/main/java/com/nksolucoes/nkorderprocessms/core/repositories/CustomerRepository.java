@@ -15,4 +15,6 @@ public interface CustomerRepository {
 	Customer updateCustomer(Customer customer);
 
 	void deleteCustomer(String customerId);
+
+	List<Customer> findByDocumentAndName(String document, String name);
 }
