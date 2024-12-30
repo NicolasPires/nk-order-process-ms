@@ -3,7 +3,9 @@ package com.nksolucoes.nkorderprocessms.transport.handler;
 import com.nksolucoes.nkorderprocessms.core.exceptions.customer.DuplicateCustomerException;
 import com.nksolucoes.nkorderprocessms.core.exceptions.item.DuplicateItemException;
 import com.nksolucoes.nkorderprocessms.core.exceptions.customer.NotFoundCustomerException;
+import com.nksolucoes.nkorderprocessms.core.exceptions.order.DuplicateOrderException;
 import com.nksolucoes.nkorderprocessms.core.exceptions.item.NotFoundItemException;
+import com.nksolucoes.nkorderprocessms.core.exceptions.order.NotFoundOrderException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -33,6 +35,16 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(NotFoundCustomerException.class)
 	public ResponseEntity<Map<String, Object>> handleNotFoundCustomerException(NotFoundCustomerException ex, HttpServletRequest request) {
+		return buildResponse(ex, HttpStatus.NOT_FOUND, request);
+	}
+
+	@ExceptionHandler(NotFoundOrderException.class)
+	public ResponseEntity<Map<String, Object>> handleNotFoundOrderException(NotFoundOrderException ex, HttpServletRequest request) {
+		return buildResponse(ex, HttpStatus.NOT_FOUND, request);
+	}
+
+	@ExceptionHandler(DuplicateOrderException.class)
+	public ResponseEntity<Map<String, Object>> handleDuplicateOrderException(DuplicateOrderException ex, HttpServletRequest request) {
 		return buildResponse(ex, HttpStatus.NOT_FOUND, request);
 	}
 

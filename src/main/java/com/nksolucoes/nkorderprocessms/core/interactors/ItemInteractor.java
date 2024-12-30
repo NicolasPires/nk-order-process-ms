@@ -57,18 +57,16 @@ public class ItemInteractor {
 			updateItem.setUnitPrice(item.getUnitPrice());
 			return this.itemRepository.updateItem(updateItem);
 		} else {
-			throw new RuntimeException("Item not found");
+			throw new NotFoundItemException("Item not found.");
 		}
 	}
 
 	public ResponseEntity<Void> deleteItem(String itemId) {
-		Item itemData = this.itemRepository.findById(itemId).get();
-		if(!Objects.isNull(itemData)) {
-			this.itemRepository.deleteItem(itemId);
-			return ResponseEntity.noContent().build();
-		}else{
-			throw new RuntimeException("Unable to find Item for delete");
+		if (!this.itemRepository.findById(itemId).isPresent()) {
+			throw new NotFoundItemException("Unable to find Item for delete.");
 		}
-
+		this.itemRepository.deleteItem(itemId);
+		return ResponseEntity.noContent().build();
 	}
+
 }
