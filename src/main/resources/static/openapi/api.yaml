@@ -4,7 +4,7 @@ info:
   description: API for managing customer in the NK Order Process Microservice
   version: 1.0.0
 servers:
-  - url: http://localhost:8080/api/v1
+  - url: http://localhost:8080
     description: Local development server
   - url: https://mock.nk-order-process-ms.com/api/v1
     description: Mock server for testing endpoints with example data
