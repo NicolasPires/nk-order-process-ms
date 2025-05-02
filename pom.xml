@@ -113,13 +113,13 @@
                 <version>6.6.0</version>
                 <executions>
                     <execution>
+                        <id>generate-sources</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <phase>generate-sources</phase> <!-- Adicione esta linha -->
                         <configuration>
-                            <inputSpec>
-                                ${project.basedir}/src/main/resources/static/openapi/api.yaml
-                            </inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/static/openapi/api.yaml</inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>com.nksolucoes.nkorderprocessms.transportlayer.documentacao.openapi</apiPackage>
                             <modelPackage>com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model</modelPackage>
