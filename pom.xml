@@ -114,26 +114,50 @@
                 <executions>
                     <execution>
                         <id>generate-sources</id>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <phase>generate-sources</phase> <!-- Adicione esta linha -->
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/static/openapi/api.yaml</inputSpec>
                             <generatorName>spring</generatorName>
+
+                            <!-- Gera aqui -->
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+
                             <apiPackage>com.nksolucoes.nkorderprocessms.transportlayer.documentacao.openapi</apiPackage>
                             <modelPackage>com.nksolucoes.nkorderprocessms.transportlayer.documentacao.model</modelPackage>
+
                             <supportingFilesToGenerate>
                                 ApiUtil.java
                             </supportingFilesToGenerate>
+
                             <configOptions>
-                                <sourceFolder>src/main/java/</sourceFolder>
                                 <delegatePattern>true</delegatePattern>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useJakartaEe>true</useJakartaEe>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <useOptional>false</useOptional>
                             </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>add-openapi-generated</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/openapi/src/main/java</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>
